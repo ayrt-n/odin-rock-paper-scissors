@@ -13,11 +13,53 @@
             function computerPlay() {
                 const choiceArray = ["rock", "paper", "scissors"];
                 const randomNum = Math.floor(Math.random() * 3);
-                console.log(randomNum);
-                console.log(choiceArray[randomNum]);
+
+                return choiceArray[randomNum];
             }
 
-            computerPlay();
+            function declareWinner(playerSelection, computerSelection) {
+                if (playerSelection === "rock") {
+                    if (computerSelection === "rock") {
+                        return "Draw! Rock does not beat Rock";
+                    } else if (computerSelection === "paper") {
+                        return "You lose! Paper beats Rock";
+                    } else {
+                        return "You win! Rock beats Scissors";
+                    }
+                } else if (playerSelection === "paper") {
+                    if (computerSelection === "rock") {
+                        return "You win! Paper beats Rock";
+                    } else if (computerSelection === "paper") {
+                        return "Draw! Paper does not beat Paper";
+                    } else {
+                        return "You lose! Scissors beats Paper";
+                    }
+                } else if (playerSelection === "scissors") {
+                    if (computerSelection === "rock") {
+                        return "You lose! Rock beats Scissors";
+                    } else if (computerSelection === "paper") {
+                        return "You win! Scissors beats Paper";
+                    } else {
+                        return "Draw! Scissors does not beat Scissors";
+                    }
+                } else {
+                    return "Error: No winner could be determined";
+                }
+            }
+
+            function playerSelection() {
+                let playerChoice = prompt("Choose rock, paper, or scissors?", "");
+
+                if (playerChoice.toLowerCase() !== "rock" && 
+                playerChoice.toLowerCase() !== "paper" &&
+                playerChoice.toLowerCase() !== "scissors") {
+                    alert("Must choose rock, paper or scissors");
+                    playerSelection();
+                } else {
+                    return playerChoice;
+                } 
+            }
+
 
         </script>
     </body>
