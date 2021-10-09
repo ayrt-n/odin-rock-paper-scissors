@@ -48,13 +48,11 @@
             function playerSelection() {
                 let playerChoice = prompt("Choose rock, paper, or scissors?", "");
 
-                if (!playerChoice) {
-                    return playerChoice;
-                } else if (playerChoice.toLowerCase() !== "rock" && 
+                if (playerChoice.toLowerCase() !== "rock" && 
                 playerChoice.toLowerCase() !== "paper" &&
                 playerChoice.toLowerCase() !== "scissors") {
                     alert("Must choose rock, paper or scissors");
-                    playerSelection();
+                    return playerSelection();
                 } else {
                     return playerChoice;
                 } 
@@ -81,8 +79,6 @@
 
                     counter++;
                 }
-
-                console.log(wins)
 
                 if (wins > 0) {
                     console.log("You win!");
