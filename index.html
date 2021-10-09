@@ -20,37 +20,37 @@
             function declareWinner(playerSelection, computerSelection) {
                 if (playerSelection === "rock") {
                     if (computerSelection === "rock") {
-                        return "Draw! Rock does not beat Rock";
+                        return 0; // Zero indicates a draw
                     } else if (computerSelection === "paper") {
-                        return "You lose! Paper beats Rock";
+                        return -1; // Negative one indicates a loss
                     } else {
-                        return "You win! Rock beats Scissors";
+                        return 1; // One indicates a win
                     }
                 } else if (playerSelection === "paper") {
                     if (computerSelection === "rock") {
-                        return "You win! Paper beats Rock";
+                        return 1;
                     } else if (computerSelection === "paper") {
-                        return "Draw! Paper does not beat Paper";
+                        return 0;
                     } else {
-                        return "You lose! Scissors beats Paper";
-                    }
-                } else if (playerSelection === "scissors") {
-                    if (computerSelection === "rock") {
-                        return "You lose! Rock beats Scissors";
-                    } else if (computerSelection === "paper") {
-                        return "You win! Scissors beats Paper";
-                    } else {
-                        return "Draw! Scissors does not beat Scissors";
+                        return -1;
                     }
                 } else {
-                    return "Error: No winner could be determined";
+                    if (computerSelection === "rock") {
+                        return -1;
+                    } else if (computerSelection === "paper") {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
                 }
             }
 
             function playerSelection() {
                 let playerChoice = prompt("Choose rock, paper, or scissors?", "");
 
-                if (playerChoice.toLowerCase() !== "rock" && 
+                if (!playerChoice) {
+                    return playerChoice;
+                } else if (playerChoice.toLowerCase() !== "rock" && 
                 playerChoice.toLowerCase() !== "paper" &&
                 playerChoice.toLowerCase() !== "scissors") {
                     alert("Must choose rock, paper or scissors");
@@ -60,6 +60,40 @@
                 } 
             }
 
+            function game() {
+                let counter = 0;
+                let wins = 0;
+
+                while (counter < 5) {
+                    const playerChoice = playerSelection();
+                    const computerChoice = computerPlay();
+
+                    let results = declareWinner(playerChoice, computerChoice);
+                    wins = wins + results;
+
+                    if (results === 1) {
+                        console.log("You win! " + playerChoice + " beats " + computerChoice);
+                    } else if (results === -1) {
+                        console.log("You lose! " + computerChoice + " beats " + playerChoice);
+                    } else {
+                        console.log("Draw! " + computerChoice + " does not beat " + playerChoice);
+                    }
+
+                    counter++;
+                }
+
+                console.log(wins)
+
+                if (wins > 0) {
+                    console.log("You win!");
+                } else if (wins < 0) {
+                    console.log("You lose!");
+                } else {
+                    console.log("Draw!");
+                }
+            }
+
+            game();
 
         </script>
     </body>
