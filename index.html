@@ -5,9 +5,43 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Orbitron">
         <title>Odin: Rock Paper Scissors!</title>
     </head>
     <body>
+
+        <div class="container">
+            <div class="scoreboard">
+                <div class="score">
+                    <div class="player">Humans</div>
+                    <div class="points">0 0</div>
+                </div>
+                <div class="score">
+                    <div class="player">Computers</div>
+                    <div class="points">0 0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h1>Instructions</h1>
+            <p>Select rock, paper, or scissors</p>
+            <p>First to five wins</p>
+        </div>
+
+        <div class="container options">
+            <img src="images/rock.png" alt="rock">
+            <img src="images/paper.png" alt="paper">
+            <img src="images/scissors.png" alt="scissors">
+        </div>
+
+        <div class="container results">
+            Results of game will go here
+        </div>
+
+
+
         <script>
                     
             function computerPlay() {
@@ -58,36 +92,8 @@
                 } 
             }
 
-            function game() {
-                let counter = 0;
-                let wins = 0;
 
-                while (counter < 5) {
-                    const playerChoice = playerSelection();
-                    const computerChoice = computerPlay();
 
-                    let results = declareWinner(playerChoice, computerChoice);
-                    wins = wins + results;
-
-                    if (results === 1) {
-                        console.log("You win! " + playerChoice + " beats " + computerChoice);
-                    } else if (results === -1) {
-                        console.log("You lose! " + computerChoice + " beats " + playerChoice);
-                    } else {
-                        console.log("Draw! " + computerChoice + " does not beat " + playerChoice);
-                    }
-
-                    counter++;
-                }
-
-                if (wins > 0) {
-                    console.log("You win!");
-                } else if (wins < 0) {
-                    console.log("You lose!");
-                } else {
-                    console.log("Draw!");
-                }
-            }
 
             game();
 

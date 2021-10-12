@@ -1,0 +1,66 @@
+body {
+    background-color: #282828;
+    font-family: 'Orbitron';
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.scoreboard {
+    background-color: #151515;
+    border: 15px solid #101010;
+    width: 500px;
+    height: 200px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.score {
+    text-align: center;
+    color: #d81b1b;
+    font-weight: bold;
+}
+
+.player {
+    font-size: 20px;
+}
+
+.points {
+    margin-top: 10px;
+    font-size: 72px;
+}
+
+.instructions {
+    margin-top: 50px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+h1 {
+    color: #FFFFFF;
+    margin: 0px;
+}
+
+p {
+    font-size: 18px;
+}
+
+.container.options {
+    margin-top: 50px;
+}
+
+img {
+    width: 150px;
+    margin: 0px 35px;
+}
+
+img:active {
+    filter: brightness(50%);
+}
