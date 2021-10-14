@@ -37,7 +37,8 @@ body {
     font-size: 72px;
 }
 
-.instructions {
+.instructions,
+.results {
     margin-top: 50px;
     text-align: center;
     color: #FFFFFF;
@@ -46,10 +47,28 @@ body {
 h1 {
     color: #FFFFFF;
     margin: 0px;
+    text-decoration: underline;
 }
 
 p {
     font-size: 18px;
+}
+
+.winner {
+    color: rgb(0, 184, 0);
+    font-size: 48px;
+    font-weight: 800;
+}
+
+.loser {
+    color: red;
+    font-size: 48px;
+    font-weight: 800;
+}
+
+.results-message {
+    font-size: 32px;
+    margin-top: 25px;
 }
 
 .container.options {

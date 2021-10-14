@@ -15,11 +15,11 @@
             <div class="scoreboard">
                 <div class="score">
                     <div class="player">Humans</div>
-                    <div class="points">0 0</div>
+                    <div class="points" id="player">00</div>
                 </div>
                 <div class="score">
                     <div class="player">Computers</div>
-                    <div class="points">0 0</div>
+                    <div class="points" id="computer">00</div>
                 </div>
             </div>
         </div>
@@ -31,16 +31,17 @@
         </div>
 
         <div class="container options">
-            <img src="images/rock.png" alt="rock">
-            <img src="images/paper.png" alt="paper">
-            <img src="images/scissors.png" alt="scissors">
+            <img src="images/rock.png" alt="rock" id="rock">
+            <img src="images/paper.png" alt="paper" id="paper">
+            <img src="images/scissors.png" alt="scissors" id="scissors">
         </div>
 
-        <div class="container results">
-            Results of game will go here
+        <div class="results">
+            <p class="player-choice"></p>
+            <p class="computer-choice"></p>
+            <p class="results-message"></p>
+            <p class="winner-message"></p>
         </div>
-
-
 
         <script>
                     
@@ -54,48 +55,109 @@
             function declareWinner(playerSelection, computerSelection) {
                 if (playerSelection === "rock") {
                     if (computerSelection === "rock") {
-                        return 0; // Zero indicates a draw
+                        return ['Draw! Rock does not beat rock.', 0]; // Zero indicates a draw
                     } else if (computerSelection === "paper") {
-                        return -1; // Negative one indicates a loss
+                        return ['You lose! Paper beats rock.', -1]; // Negative one indicates a loss
                     } else {
-                        return 1; // One indicates a win
+                        return ['You win! Rock beats paper.', 1]; // One indicates a win
                     }
                 } else if (playerSelection === "paper") {
                     if (computerSelection === "rock") {
-                        return 1;
+                        return ['You win! Paper beats rock.', 1];
                     } else if (computerSelection === "paper") {
-                        return 0;
+                        return ['Draw! Paper does not beat paper.', 0];
                     } else {
-                        return -1;
+                        return ['You lose! Scissors beats paper.', -1];
                     }
                 } else {
                     if (computerSelection === "rock") {
-                        return -1;
+                        return ['You lose! Rock beats scissors.', -1];
                     } else if (computerSelection === "paper") {
-                        return 1;
+                        return ['You win! Scissors beats paper.', 1];
                     } else {
-                        return 0;
+                        return ['Draw! Scissors does not beat scissors.', 0];
                     }
                 }
             }
 
-            function playerSelection() {
-                let playerChoice = prompt("Choose rock, paper, or scissors?", "");
-
-                if (playerChoice.toLowerCase() !== "rock" && 
-                playerChoice.toLowerCase() !== "paper" &&
-                playerChoice.toLowerCase() !== "scissors") {
-                    alert("Must choose rock, paper or scissors");
-                    return playerSelection();
-                } else {
-                    return playerChoice;
-                } 
+            function formatNumber(num) {
+                return num.toLocaleString('en-US', {
+                    minimumIntegerDigits: 2,
+                    useGrouping: false})
             }
 
+            const images = document.querySelectorAll('img');
+            const playerScore = document.querySelector('#player');
+            const computerScore = document.querySelector('#computer');
+            const playerChoice = document.querySelector('.player-choice');
+            const computerChoice = document.querySelector('.computer-choice');
+            const resultsMessage = document.querySelector('.results-message');
+            const winnerMessage = document.querySelector('.winner-message');
+            
+            function resetScore() {
+                playerScore.textContent = formatNumber(0);
+                computerScore.textContent = formatNumber(0);
+                winnerMessage.textContent = '';
+                winnerMessage.classList.remove('loser');
+                winnerMessage.classList.remove('winner');
+            }
 
+            images.forEach((image) => {
+                image.addEventListener('click', function (e) {
+                    
+                    if (playerScore.textContent == '05' || computerScore.textContent == '05') {
+                        resetScore();
+                    }
+                    
+                    let playerSelection = e.target.id;
+                    let computerSelection = computerPlay();
 
+                    playerChoice.textContent = 'You chose: ' + playerSelection;
+                    computerChoice.textContent = 'The computer chose: ' + computerSelection;
 
-            game();
+                    results = declareWinner(playerSelection, computerSelection);
+
+                    console.log(results[0]);
+                    console.log(results[1]);
+
+                    let updatedScore;
+
+                    switch (results[1]) {
+                    case 1:
+                        updatedScore = parseInt(playerScore.textContent) + 1;
+                        playerScore.textContent = formatNumber(updatedScore);
+                        break;
+                    case -1:
+                        updatedScore = parseInt(computerScore.textContent) + 1;
+                        computerScore.textContent = formatNumber(updatedScore);
+                        break;
+                    default:
+                        break;
+                    }
+
+                    resultsMessage.textContent = results[0];
+
+                    console.log(updatedScore)
+
+                    if (updatedScore == 5) {
+                        switch (results[1]) {
+                            case 1:
+                                winnerMessage.textContent = 'Congratulations! You beat the computer in a first-to-five! Keep playing to try again.';
+                                winnerMessage.classList.add('winner');
+                                break;
+
+                            case -1:
+                                winnerMessage.textContent = 'Game over! The computer beat you in a first-to-five! Keep playing to try again.';
+                                winnerMessage.classList.add('loser');
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
+
+                });
+            });
 
         </script>
     </body>
